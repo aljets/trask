@@ -16,6 +16,8 @@ Or install it yourself as:
 
     $ gem install trask
 
+If you are not using a service to store your content, run the generator to create a pages, html_content, html_revisions, collection_items, and collection_placements tables.
+
 ## Usage
 
 TODO: Write usage instructions here
