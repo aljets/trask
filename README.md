@@ -1,6 +1,10 @@
-# Trask
+# Trask, for Rails
 
-A super simple content editable platform for Rails.
+Most Content Management Systems try to do a lot. Trask tries to do very little, so it doesn't get in the way. Trask is perfect for when you want full control over your project and layout, but just want to make certain sections editable so development doesn't need to own content.
+
+This is a content management solution for developers.
+
+Use with ActiveRecord, or modify PageWrapper and use it with a service.
 
 ## Installation
 
@@ -16,7 +20,10 @@ Or install it yourself as:
 
     $ gem install trask
 
-If you are not using a service to store your content, run the generator to create a pages, html_content, html_revisions, collection_items, and collection_placements tables.
+
+If you are not using a service to store your content, run the rake task to create a pages, html_content, html_revisions, collection_items, and collection_placements tables:
+    $ rake trask:install:migrations
+
 
 ## Usage
 

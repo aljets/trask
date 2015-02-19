@@ -25,7 +25,8 @@ module Trask
           else
             [:published_revision, :published_items]
           end
-          @_editable_page = Page.where(key: page_key).includes(html_placements: revision, collection_placements: items) || Page.new(key: page_key).create
+
+          @_editable_page = Trask::PageWrapper.new(key: page_key, revision: revision, items: items)
         end
 
       end

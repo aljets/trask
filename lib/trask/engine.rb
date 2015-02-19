@@ -1,7 +1,9 @@
-require 'trask/application_controller_inclusions'
+require 'trask/controller_helpers'
 
 module Trask
   class Engine < ::Rails::Engine
+    isolate_namespace Trask
+
     initializer :assets do |config|
       Rails.application.config.assets.precompile += %w( )
     end
