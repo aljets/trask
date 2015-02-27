@@ -5,17 +5,7 @@ module Trask
 
     attr_reader :tag, :html, :attrs
 
-    class << self
-
-      def build(*args, &block)
-        item = self.new(*args, &block)
-        item.map! if !item.is_mapped?
-        item.show
-      end
-
-    end
-
-    def initialize(page, edit_mode, item_label, shared: false, css_class: '', tag: 'div', &block)
+    def initialize(page, edit_mode, block, item_label, shared: false, css_class: '', tag: 'div')
       raise NotImplementedError, "Must declare 'editable_page' in before_filter" if !page
       @page = page
       @edit_mode = edit_mode
@@ -23,6 +13,7 @@ module Trask
       @shared = shared
       @css_class = css_class
       @tag = tag
+      @block = block
     end
 
     def map!
@@ -44,8 +35,8 @@ module Trask
 
       @html = if revision && !revision[:content].blank?
         revision[:content].html_safe
-      elsif !revision && block_given? && !capture(&block).blank?
-        capture(&block)
+      elsif !revision && @block && !@block.blank?
+        @block
       elsif @edit_mode
         tag_classes += " hide-on-preview"
         "[#{@item_label} is empty and will be hidden]"

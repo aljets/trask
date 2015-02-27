@@ -29,9 +29,11 @@ module Trask
     def build_html_placements
       result = {}
       @page.html_placements.each do |placement|
-        result[placement.key] = {}
-        result[placement.key][:content] = placement.latest_revision && placement.latest_revision.content
-        result[placement.key][:published_at] = placement.latest_revision && placement.latest_revision.published_at
+        if placement.latest_revision
+          result[placement.key] = {}
+          result[placement.key][:content] = placement.latest_revision.content
+          result[placement.key][:published_at] = placement.latest_revision.published_at
+        end
       end
       self.html_placements = result
     end

@@ -1,6 +1,14 @@
 module Trask
   class Editable
 
+    class << self
+      def build(*args, &block)
+        item = self.new(*args, &block)
+        item.map! if !item.is_mapped?
+        item.show
+      end
+    end
+
     def key
       if ( @item_label =~ /\|/ )
         raise NameError, "Must not have pipes ('|') in item label"
