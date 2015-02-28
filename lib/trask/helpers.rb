@@ -4,17 +4,16 @@ module Trask
   module ViewHelpers
     
     def editable_collection(*args, &block)
-    end
-
-    def editable_content(*args, &block)
       block = capture(&block) if block_given?
-      content = Trask::EditableHtml.build(@_editable_page, edit_mode?, block, *args)
-      if content.html
-        content_tag content.tag, content.html, content.attrs
-      end
+      collection = Trask::ContentCollection.build(@_editable_page, block, *args)
+      render partial: 'content_collection', locals: { collection: collection }
     end
 
-    private
+    def editable_html(*args, &block)
+      block = capture(&block) if block_given?
+      content = Trask::EditableHtml.build(@_editable_page, block, *args)
+      render partial: 'trask/editable_html', locals: { content: content }
+    end
 
   end
 end

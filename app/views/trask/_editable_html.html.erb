@@ -1,0 +1,14 @@
+<%- 
+  attrs = { class: content.css_class }
+  if edit_mode?
+    attrs[:class] += " editable-content default_content"
+    attrs[:"data-html-key"] = content.key
+    attrs[:"data-is-published"] = content.is_published?
+    # TODO: shared, and account id show
+    if !content.html
+      content.html = "[Item is empty and will be hidden]"
+      attrs[:class] += " hide-on-preview" 
+    end
+  end %>
+
+<%= content_tag content.tag, content.html, attrs %>
